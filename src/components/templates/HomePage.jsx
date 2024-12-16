@@ -10,9 +10,7 @@ function HomePage() {
       .then((json) => setCoins(json));
   }, []);
   return (
-    <div>
-      <TableCoin coins={coins} />
-    </div>
+    <div> <TableCoin coins={coins} /></div>                         
   );
 }
 
