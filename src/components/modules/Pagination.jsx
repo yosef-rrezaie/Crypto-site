@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-function Pagination() {
-  const [page, setPage] = useState(1);
+function Pagination({page , setPage}) {
+//   const [page, setPage] = useState(1);
 
   const previousHandler = () => {
     if (page <= 1) return;
