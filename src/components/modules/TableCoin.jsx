@@ -5,10 +5,10 @@ import { RotatingLines } from "react-loader-spinner";
 
 import styles from "./TableCoin.module.css";
 
-import React from "react";
+import React, { useState } from "react";
 
-function TableCoin({ coins, isLoading }) {
-  console.log(coins);
+function TableCoin({ coins, isLoading, }) {
+  
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -57,7 +57,9 @@ const TableRow = ({
         </div>
       </td>
       <td>{name}</td>
-      <td>${current_price.toLocaleString()}</td>
+      <td>
+        {current_price.toLocaleString()}
+      </td>
       <td className={price_change > 0 ? styles.success : styles.erorr}>
         {price_change.toFixed(2)}%
       </td>
