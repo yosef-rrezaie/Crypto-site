@@ -7,11 +7,20 @@ function Search({ currency, setCurrency }) {
 
   useEffect(() => {
     if (!text) return;
-    fetch(searchCoin(text))
-      .then((res) => res.json())
-      .then((json) => setCoins(json.coins));
+    const controller = new AbortController();
+    try {
+      fetch(searchCoin(text), { signal: controller.signal })
+        .then((res) => res.json())
+        .then((json) => setCoins(json.coins));
+    } catch (error) {
+      console.log(error.message);
+    }
+
+    return () => {
+      controller.abort();
+    };
   }, [text]);
-  console.log(coins)
+  console.log(coins);
 
   return (
     <div>
