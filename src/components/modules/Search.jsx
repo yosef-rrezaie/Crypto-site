@@ -50,20 +50,22 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      <div className={styles.searchResult}>
-        {isLoading ? (
-          <RotatingLines strokeColor="blue" width="50px" height="50px" />
-        ) : null}
+      {(coins.length > 0 || isLoading) ? (
+        <div className={styles.searchResult}>
+          {isLoading ? (
+            <RotatingLines strokeColor="blue" width="50px" height="50px" />
+          ) : null}
 
-        <ul>
-          {coins.map((coin) => (
-            <li key={coin.id}>
-              <img src={coin.thumb} alt={coin.name} />
-              <p>{coin.name}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <ul>
+            {coins.map((coin) => (
+              <li key={coin.id}>
+                <img src={coin.thumb} alt={coin.name} />
+                <p>{coin.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
     </div>
   );
 }
