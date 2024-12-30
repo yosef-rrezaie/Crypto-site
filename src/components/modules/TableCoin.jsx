@@ -6,6 +6,7 @@ import { RotatingLines } from "react-loader-spinner";
 import styles from "./TableCoin.module.css";
 
 import React, { useState } from "react";
+import { marketChart } from "../../services/CryptoApi";
 
 function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
@@ -26,7 +27,12 @@ function TableCoin({ coins, isLoading, currency, setChart }) {
           </thead>
           <tbody>
             {coins.map((coin) => (
-              <TableRow coin={coin} key={coin.id} currency={currency} setChart={setChart} />
+              <TableRow
+                coin={coin}
+                key={coin.id}
+                currency={currency}
+                setChart={setChart}
+              />
             ))}
           </tbody>
         </table>
@@ -39,6 +45,7 @@ export default TableCoin;
 
 const TableRow = ({
   coin: {
+    id,
     name,
     image,
     symbol,
@@ -58,9 +65,16 @@ const TableRow = ({
     cost = "¥";
   }
 
-
   function showHandler() {
-    setChart(true)
+    setChart(true);
+    console.log(id);
+    try {
+      fetch(marketChart(id))
+        .then((res) => res.json())
+        .then((json) => setChart(json));
+    } catch (error) {
+      setChart(null);
+    }
   }
   return (
     <tr>
