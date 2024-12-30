@@ -7,7 +7,7 @@ import styles from "./TableCoin.module.css";
 
 import React, { useState } from "react";
 
-function TableCoin({ coins, isLoading, currency }) {
+function TableCoin({ coins, isLoading, currency, setChart }) {
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -26,7 +26,7 @@ function TableCoin({ coins, isLoading, currency }) {
           </thead>
           <tbody>
             {coins.map((coin) => (
-              <TableRow coin={coin} key={coin.id} currency={currency} />
+              <TableRow coin={coin} key={coin.id} currency={currency} setChart={setChart} />
             ))}
           </tbody>
         </table>
@@ -47,6 +47,7 @@ const TableRow = ({
     price_change_percentage_24h: price_change,
   },
   currency,
+  setChart,
 }) => {
   let cost = null;
   if (currency === "usd") {
@@ -56,16 +57,23 @@ const TableRow = ({
   } else {
     cost = "¥";
   }
+
+
+  function showHandler() {
+    setChart(true)
+  }
   return (
     <tr>
       <td>
-        <div className={styles.symbol}>
+        <div className={styles.symbol} onClick={showHandler}>
           <img src={image} alt={name} />
           <span>{symbol.toUpperCase()}</span>
         </div>
       </td>
       <td>{name}</td>
-      <td>{cost} {current_price.toLocaleString()}</td>
+      <td>
+        {cost} {current_price.toLocaleString()}
+      </td>
       <td className={price_change > 0 ? styles.success : styles.erorr}>
         {price_change.toFixed(2)}%
       </td>
