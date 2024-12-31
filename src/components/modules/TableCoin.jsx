@@ -52,6 +52,8 @@ const TableRow = ({
     total_volume,
     current_price,
     price_change_percentage_24h: price_change,
+    ath , 
+    market_cap
   },
   currency,
   setChart,
@@ -69,7 +71,7 @@ const TableRow = ({
     try {
       fetch(marketChart(id))
         .then((res) => res.json())
-        .then((json) => setChart(json));
+        .then((json) => setChart({...json , name , image , current_price , ath , market_cap}));
     } catch (error) {
       setChart(null);
     }
