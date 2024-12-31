@@ -66,8 +66,6 @@ const TableRow = ({
   }
 
   function showHandler() {
-    setChart(true);
-    console.log(id);
     try {
       fetch(marketChart(id))
         .then((res) => res.json())
@@ -76,6 +74,7 @@ const TableRow = ({
       setChart(null);
     }
   }
+
   return (
     <tr>
       <td>
