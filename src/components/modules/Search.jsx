@@ -35,7 +35,6 @@ function Search({ currency, setCurrency }) {
       controller.abort();
     };
   }, [text]);
-  console.log(coins);
 
   return (
     <div className={styles.searchBox}>

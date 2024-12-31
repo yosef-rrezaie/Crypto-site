@@ -29,7 +29,7 @@ function HomePage() {
         setChart={setChart}
       />
       <Pagination page={page} setPage={setPage} />
-      {chart ? <Chart chart={chart} setChart={setChart} /> : null}
+      {chart && <Chart chart={chart} setChart={setChart} />}
     </div>
   );
 }
